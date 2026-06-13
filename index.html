@@ -4,10 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Capybaron - The Richest Capybara On Solana</title>
+    <!-- Import Font Pixel Art: Press Start 2P -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        /* --- RESET & DASAR --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
         body {
             background-color: #050510;
@@ -21,6 +27,7 @@
             position: relative;
         }
 
+        /* --- BACKGROUND ANIMASI (CANVAS) --- */
         #pixelCanvas {
             position: fixed;
             top: 0;
@@ -31,18 +38,26 @@
             image-rendering: pixelated;
         }
 
+        /* --- EFEK SCANLAYERS (CRT TV EFFECT) --- */
         .scanlines {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1));
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0),
+                rgba(255,255,255,0) 50%,
+                rgba(0,0,0,0.1) 50%,
+                rgba(0,0,0,0.1)
+            );
             background-size: 100% 4px;
             z-index: 0;
             pointer-events: none;
         }
 
+        /* --- KONTAINER UTAMA --- */
         .content-wrapper {
             position: relative;
             z-index: 10;
@@ -50,19 +65,32 @@
             max-width: 700px;
             padding: 60px 20px;
             text-align: center;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(3px);
-            border: 4px solid rgba(20, 241, 149, 0.3);
+            background: rgba(0, 0, 0, 0.6); /* Lebih gelap untuk kontras */
+            backdrop-filter: blur(5px);
+            border: 4px solid rgba(20, 241, 149, 0.4);
             margin-top: 40px;
-            box-shadow: 0 0 30px rgba(0,0,0,0.8);
+            margin-bottom: 40px;
+            box-shadow: 0 0 40px rgba(153, 69, 255, 0.2);
+            transition: transform 0.1s;
         }
 
+        /* --- TYPOGRAPHY --- */
         h1 {
-            font-size: 28px;
-            margin-bottom: 15px;
-            text-shadow: 4px 4px 0px #000000, 0 0 15px #9945FF;
+            font-size: 32px;
+            margin-bottom: 25px;
+            text-shadow: 4px 4px 0px #000000, 0 0 20px #9945FF;
             line-height: 1.5;
             color: #fff;
+            cursor: default;
+            display: inline-block;
+        }
+
+        /* Efek Glitch saat hover title */
+        h1:hover {
+            text-shadow: 
+                -2px 0 #14F195, 
+                2px 0 #9945FF;
+            transform: scale(1.02);
         }
 
         p {
@@ -78,35 +106,50 @@
             color: #14F195;
             margin-bottom: 30px;
             display: block;
+            text-shadow: 2px 2px 0 #000;
         }
 
-        /* --- LOGO CONTAINER FIX (UKURAN DIKECILKAN) --- */
+        /* --- GAMBAR CAPYBARON --- */
         .capy-img-container {
-            margin: 20px auto 30px auto; /* Margin Atas: 20px, Bawah: 30px */
-            width: 180px;  /* Dari 250px jadi 180px (Lebih kecil = Terlihat mundur) */
-            height: 180px; 
+            margin: 30px auto;
+            width: 200px;
+            height: 200px;
             background-color: #000;
             display: flex;
             justify-content: center;
             align-items: center;
             border: 4px solid #14F195;
-            box-shadow: 0 0 20px #14F195;
+            box-shadow: 0 0 25px rgba(20, 241, 149, 0.5);
             image-rendering: pixelated;
-            transition: transform 0.3s;
-            overflow: hidden;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden; /* Agar gambar tidak keluar dari kotak */
+        }
+
+        /* Efek float */
+        .capy-img-container {
+            animation: float 4s ease-in-out infinite;
         }
 
         .capy-img-container:hover {
-            transform: scale(1.05) rotate(2deg);
-            box-shadow: 0 0 30px #14F195;
+            transform: scale(1.1) rotate(3deg);
+            border-color: #fff;
         }
 
-        img[alt="Capybaron"] {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
+        img[alt="Capybaron Logo"] {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Mengisi kotak, memotong jika perlu */
+            image-rendering: pixelated;
         }
 
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* --- TOMBOL --- */
         .btn-group {
             margin-top: 40px;
             margin-bottom: 20px;
@@ -120,166 +163,237 @@
             text-decoration: none;
             padding: 18px 30px;
             font-size: 14px;
-            font-weight: bold;
             border-radius: 0px;
-            display: inline-block;
-            width: 260px;
-            transition: transform 0.1s, box-shadow 0.1s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 280px;
+            transition: all 0.2s;
             text-transform: uppercase;
             border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
         }
 
-        .btn:active { transform: translateY(4px); }
+        .btn:active {
+            transform: translateY(4px);
+        }
 
         .btn-telegram {
             background-color: #0088cc;
             color: white;
             border: 2px solid #00aaff;
-            box-shadow: 5px 5px 0px #004d6e, 0 0 15px #0088cc;
+            box-shadow: 0 6px 0 #004d6e;
         }
-        .btn-telegram:hover { background-color: #0099e6; }
+        .btn-telegram:hover { 
+            background-color: #0099e6; 
+            transform: translateY(-2px);
+            box-shadow: 0 8px 0 #004d6e;
+        }
 
         .btn-twitter {
             background-color: #000000;
             color: white;
             border: 2px solid #ffffff;
-            box-shadow: 5px 5px 0px #333333, 0 0 15px rgba(255,255,255,0.3);
+            box-shadow: 0 6px 0 #333333;
         }
-        .btn-twitter:hover { background-color: #1a1a1a; border-color: #ddd; }
+        .btn-twitter:hover { 
+            background-color: #1a1a1a; 
+            border-color: #14F195;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 0 #333333;
+        }
 
+        /* --- CRYPTO ADDRESS BOX --- */
         .crypto-box {
             margin-top: 15px;
             width: 100%;
-            max-width: 300px;
-            background: #000;
+            max-width: 320px;
+            background: #0a0a0a;
             border: 2px solid #14F195;
-            padding: 8px 12px;
+            padding: 10px 15px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 5px 5px 0px #0a4d2e;
+            box-shadow: 0 6px 0 #054d2e;
             cursor: pointer;
             transition: all 0.2s;
+            position: relative;
         }
 
         .crypto-box:hover {
             border-color: #fff;
-            transform: translate(-2px, -2px);
-            box-shadow: 7px 7px 0px #0a4d2e;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 0 #054d2e;
+        }
+
+        .crypto-box:active {
+            transform: translateY(4px);
+            box-shadow: 0 0 0 #054d2e;
         }
 
         .addr-text {
             color: #14F195;
-            font-size: 10px;
+            font-size: 11px;
             text-shadow: 1px 1px 0 #000;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            margin-right: 10px;
+            margin-right: 15px;
+            font-family: monospace;
+            letter-spacing: -0.5px;
         }
 
         .copy-btn {
             background: #14F195;
             border: none;
             color: #000;
-            padding: 6px 10px;
+            padding: 8px 12px;
             font-family: 'Press Start 2P';
-            font-size: 8px;
+            font-size: 9px;
             cursor: pointer;
             flex-shrink: 0;
             font-weight: bold;
+            pointer-events: none;
         }
 
-        .copy-btn:active { transform: scale(0.95); }
+        /* --- TOAST NOTIFICATION --- */
+        .toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #14F195;
+            color: #000;
+            text-align: center;
+            padding: 16px;
+            position: fixed;
+            z-index: 100;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            border: 4px solid #000;
+            box-shadow: 4px 4px 0 #9945FF;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.3s, bottom 0.3s;
+        }
 
+        .toast.show {
+            visibility: visible;
+            opacity: 1;
+            bottom: 50px;
+        }
+
+        /* --- FOOTER --- */
         .footer-text {
             margin-top: 60px;
             margin-bottom: 20px;
             font-size: 10px;
             color: #EFFD5F;
             text-shadow: 1px 1px 0 #000;
+            opacity: 0.8;
         }
 
-        /* Responsive Mobile */
+        /* --- RESPONSIVE --- */
         @media (max-width: 600px) {
-            h1 { font-size: 18px; }
-            .content-wrapper { margin-top: 20px; padding: 30px 15px; width: 95%; }
-            .btn { width: 100%; font-size: 12px; }
-            .capy-img-container { 
-                width: 150px; /* Lebih kecil di HP */
-                height: 150px; 
-            }
+            h1 { font-size: 20px; }
+            .content-wrapper { margin-top: 20px; padding: 30px 15px; width: 90%; }
+            .btn { width: 100%; font-size: 12px; padding: 15px 20px; }
+            .capy-img-container { width: 160px; height: 160px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Canvas Background -->
     <canvas id="pixelCanvas"></canvas>
+    
+    <!-- CRT Overlay -->
     <div class="scanlines"></div>
 
-    <div class="content-wrapper">
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">ADDRESS COPIED TO CLIPBOARD!</div>
+
+    <!-- Konten Utama -->
+    <main class="content-wrapper">
         <h1>CAPYBARON</h1>
         <span class="highlight">The Richest Capybara On Solana</span>
 
-        <!-- Gambar Logo (Ukuran diperkecil agar terlihat lebih mundur/jauh) -->
+        <!-- Gambar Capybaron (LOGO LOKAL) -->
         <div class="capy-img-container">
-            <img src="capybaron.png" alt="Capybaron Logo">
+            <!-- Pastikan file ppneon.jpg ada di folder yang sama -->
+            <img src="ppneon.jpg" alt="Capybaron Logo">
         </div>
 
+        <!-- Deskripsi -->
         <p>
             The dogs are barking, the cats are fighting, but the Baron? The Baron is just chilling. Introducing $BARON, the richest and most relaxed Capybara on the blockchain. While other coins panic, we sip tea in the VIP lounge. The swamp era is over. The mansion era has begun.
         </p>
 
+        <!-- Tombol Sosial Media -->
         <div class="btn-group">
             <a href="https://t.me/+vSxQVvlavq85Yjll" target="_blank" class="btn btn-telegram">
-                Join Telegram
+                JOIN TELEGRAM
             </a>
 
             <a href="https://x.com/capybaronsol" target="_blank" class="btn btn-twitter">
-                Follow Twitter (X)
+                FOLLOW TWITTER (X)
             </a>
 
-            <div class="crypto-box" onclick="copyToClipboard()">
-                <span id="addrText" class="addr-text">sooon</span>
-                <button id="copyBtn" class="copy-btn">COPY</button>
+            <!-- CRYPTO ADDRESS BOX -->
+            <div class="crypto-box" onclick="copyToClipboard()" role="button" aria-label="Copy Contract Address">
+                <span id="addrText" class="addr-text">SOOON</span>
+                <button class="copy-btn">COPY</button>
             </div>
         </div>
 
         <p class="footer-text">© 2026 Capybaron. Powered by Solana network.</p>
-    </div>
+    </main>
 
+    <!-- JAVASCRIPT -->
     <script>
-        const fullAddress = "sooon"; 
-
+        // --- CONFIGURATION ---
+        const fullAddress = "SOOON"; // GANTI DENGAN ADDRESS ASLI
+        
+        // --- COPY FUNCTION WITH TOAST ---
         function copyToClipboard() {
-            navigator.clipboard.writeText(fullAddress).then(() => {
-                const btn = document.getElementById('copyBtn');
-                const txt = document.getElementById('addrText');
-                
-                const originalBtnText = btn.innerText;
-                const originalAddrText = txt.innerText;
-
-                btn.innerText = "OK!";
-                btn.style.background = "#ffffff";
-                txt.innerText = "COPIED!"; 
-
-                setTimeout(() => {
-                    btn.innerText = originalBtnText;
-                    btn.style.background = "#14F195";
-                    txt.innerText = originalAddrText;
-                }, 2000);
-            }).catch(err => {
-                console.error('Gagal menyalin', err);
-                alert("Gagal menyalin alamat.");
-            });
+            const textArea = document.createElement("textarea");
+            textArea.value = fullAddress;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-9999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                showToast();
+            } catch (err) {
+                console.error('Fallback failed', err);
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(fullAddress).then(showToast);
+                }
+            }
+            
+            document.body.removeChild(textArea);
         }
 
+        function showToast() {
+            const toast = document.getElementById("toast");
+            toast.className = "toast show";
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+
+        // --- ANIMATION ENGINE ---
         const canvas = document.getElementById('pixelCanvas');
-        const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext('2d', { alpha: false });
 
         let width, height;
         let frame = 0;
-        
+        let mouseX = 0;
+        let mouseY = 0;
+        let targetParallaxX = 0;
+        let currentParallaxX = 0;
+
         const colors = {
             skyTop: '#050510',
             skyBot: '#1a1a3a',
@@ -287,7 +401,8 @@
             neonG: '#14F195',
             water: '#080814',
             moon: '#FFFFDD',
-            capy: '#8B5E3C'
+            capy: '#8B5E3C',
+            capyDark: '#6F4E37'
         };
 
         function resize() {
@@ -295,36 +410,57 @@
             height = window.innerHeight;
             canvas.width = width;
             canvas.height = height;
+            initCity();
         }
         window.addEventListener('resize', resize);
-        resize();
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / width) * 2 - 1;
+            mouseY = (e.clientY / height) * 2 - 1;
+        });
 
         const stars = [];
-        for(let i=0; i<80; i++) {
+        for(let i=0; i<100; i++) {
             stars.push({
                 x: Math.random() * 2000,
-                y: Math.random() * (height * 0.6),
-                blink: Math.random()
+                y: Math.random() * (height * 0.5),
+                size: Math.random() > 0.9 ? 2 : 1,
+                blinkSpeed: 0.02 + Math.random() * 0.05,
+                offset: Math.random() * 100
             });
         }
 
         const buildings = [];
         function initCity() {
             buildings.length = 0;
-            let x = 0;
+            let x = -50;
             while(x < width + 200) {
+                const bWidth = 30 + Math.random() * 60;
+                const bHeight = 50 + Math.random() * 300;
+                const windows = [];
+                const rows = Math.floor(bHeight / 15);
+                const cols = Math.floor(bWidth / 10);
+                for(let r=0; r<rows; r++) {
+                    for(let c=0; c<cols; c++) {
+                        if(Math.random() > 0.3) {
+                            windows.push({
+                                r: r, c: c,
+                                lit: Math.random() > 0.5,
+                                flickerTimer: Math.random() * 200
+                            });
+                        }
+                    }
+                }
                 buildings.push({
                     x: x,
-                    w: 30 + Math.random() * 50,
-                    h: 50 + Math.random() * 250,
-                    color: Math.random() > 0.5 ? colors.neonP : colors.neonG,
-                    offset: Math.random() * 100 
+                    w: bWidth,
+                    h: bHeight,
+                    type: Math.random() > 0.5 ? 'P' : 'G',
+                    windows: windows
                 });
-                x += 30 + Math.random() * 40;
+                x += bWidth + (Math.random() * 10);
             }
         }
-        initCity();
-        window.addEventListener('resize', initCity);
 
         function drawRect(x, y, w, h, c) {
             ctx.fillStyle = c;
@@ -332,120 +468,122 @@
         }
 
         function animate() {
+            targetParallaxX = mouseX * 30;
+            currentParallaxX += (targetParallaxX - currentParallaxX) * 0.05;
+
             ctx.clearRect(0, 0, width, height);
 
-            // 1. SKY & MOON
             const grad = ctx.createLinearGradient(0, 0, 0, height * 0.7);
             grad.addColorStop(0, colors.skyTop);
             grad.addColorStop(1, colors.skyBot);
             ctx.fillStyle = grad;
             ctx.fillRect(0, 0, width, height);
 
-            const mx = (width/2) + Math.sin(frame * 0.005) * 20;
-            const my = (height/4) + Math.cos(frame * 0.005) * 10;
-            ctx.shadowBlur = 40;
-            ctx.shadowColor = colors.moon;
+            const mx = (width/2) - currentParallaxX * 0.5; 
+            const my = (height/4) + (mouseY * 10);
+            
+            ctx.shadowBlur = 50;
+            ctx.shadowColor = 'rgba(255, 255, 221, 0.5)';
             ctx.fillStyle = colors.moon;
             ctx.beginPath();
-            ctx.arc(mx, my, 30, 0, Math.PI*2);
+            ctx.arc(mx, my, 40, 0, Math.PI*2);
             ctx.fill();
             ctx.shadowBlur = 0;
 
-            // 2. STARS
+            ctx.fillStyle = 'rgba(200, 200, 180, 0.3)';
+            ctx.beginPath(); ctx.arc(mx - 10, my + 5, 8, 0, Math.PI*2); ctx.fill();
+            ctx.beginPath(); ctx.arc(mx + 15, my - 10, 5, 0, Math.PI*2); ctx.fill();
+
             stars.forEach(s => {
-                const alpha = 0.3 + Math.sin(frame * 0.05 + s.blink * 10) * 0.5;
+                const sx = (s.x + currentParallaxX * s.size * 0.5) % (width + 100);
+                if(sx < -10) return;
+                const alpha = 0.3 + Math.sin(frame * s.blinkSpeed + s.offset) * 0.5;
                 ctx.globalAlpha = alpha;
-                drawRect(s.x, s.y, 3, 3, '#fff');
+                ctx.fillStyle = '#fff';
+                ctx.fillRect(sx, s.y, s.size, s.size);
             });
-            ctx.globalAlpha = 1;
+            ctx.globalAlpha = 1.0;
 
-            // 3. CITY (MANY FLICKERING LIGHTS)
             const horizon = height * 0.65;
-            buildings.forEach(b => {
-                const shift = Math.sin(frame * 0.002) * 20;
-                
-                drawRect(b.x + shift, horizon - b.h, b.w, b.h, '#020205');
-                
-                // Neon Strip Pulse
-                const pulse = 0.6 + Math.sin(frame * 0.08 + b.offset) * 0.4;
-                
-                ctx.shadowBlur = 15 + (pulse * 10);
-                ctx.shadowColor = b.color;
-                ctx.globalAlpha = pulse;
-                
-                drawRect(b.x + shift + 4, horizon - b.h + 25, b.w - 8, 5, b.color);
-                
-                if (b.w > 50) {
-                    drawRect(b.x + shift + b.w/2 - 2, horizon - b.h + 10, 4, 60, b.color);
-                }
-
-                ctx.shadowBlur = 0;
-                ctx.globalAlpha = 1;
-
-                // Windows Grid Shimmer
-                const winSize = 3;
-                const gap = 8;
-                
-                for(let wy = 45; wy < b.h - 10; wy += gap) {
-                    if(Math.random() > 0.4) { 
-                        for(let wx = 8; wx < b.w - 8; wx += gap) {
-                            if(Math.random() > 0.65) { 
-                                ctx.fillStyle = b.color;
-                                ctx.fillRect(b.x + shift + wx, horizon - b.h + wy, winSize, winSize);
-                            }
-                        }
-                    }
-                }
-            });
-
-            // 4. DANAU
-            drawRect(0, horizon, width, height - horizon, colors.water);
             
-            // Reflections
-            ctx.globalAlpha = 0.15;
-            for(let y = horizon; y < height; y += 10) {
-                const waveOffset = Math.sin(frame * 0.05 + y * 0.1) * 5;
-                
-                buildings.forEach(b => {
-                    const shift = Math.sin(frame * 0.002) * 20;
-                    if (Math.random() > 0.7) {
-                        ctx.fillStyle = b.color;
-                        ctx.fillRect(b.x + shift + 4, y + waveOffset + 25, b.w - 8, 2);
+            buildings.forEach(b => {
+                const bx = b.x + currentParallaxX; 
+                drawRect(bx, horizon - b.h, b.w, b.h, '#020205');
+
+                const neonColor = b.type === 'P' ? colors.neonP : colors.neonG;
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = neonColor;
+                ctx.fillStyle = neonColor;
+                ctx.fillRect(bx, horizon - b.h, b.w, 4);
+                ctx.shadowBlur = 0;
+
+                b.windows.forEach(win => {
+                    win.flickerTimer--;
+                    if(win.flickerTimer <= 0) {
+                        win.lit = !win.lit;
+                        win.flickerTimer = 100 + Math.random() * 400;
+                    }
+
+                    if(win.lit) {
+                        const wx = bx + 4 + (win.c * 10);
+                        const wy = (horizon - b.h + 10) + (win.r * 15);
+                        ctx.fillStyle = neonColor;
+                        ctx.globalAlpha = 0.6;
+                        ctx.fillRect(wx, wy, 4, 6);
                     }
                 });
-            }
-            ctx.globalAlpha = 1;
+                ctx.globalAlpha = 1.0;
+            });
 
-            // 5. CAPYBARAS
-            const cx = width * 0.3 + Math.sin(frame * 0.01) * 10;
-            const cy = horizon + 30;
+            drawRect(0, horizon, width, height - horizon, colors.water);
             
-            ctx.fillStyle = 'rgba(0,0,0,0.5)';
-            ctx.beginPath(); ctx.ellipse(cx + 40, cy + 50, 50, 8, 0, 0, Math.PI*2); ctx.fill();
+            ctx.globalCompositeOperation = 'overlay';
+            ctx.globalAlpha = 0.2;
+            buildings.forEach(b => {
+                const bx = b.x + currentParallaxX;
+                const neonColor = b.type === 'P' ? colors.neonP : colors.neonG;
+                ctx.fillStyle = neonColor;
+                for(let i=0; i<5; i++) {
+                    const ry = horizon + 10 + (i * 15) + Math.sin(frame * 0.05 + i) * 5;
+                    ctx.fillRect(bx + 5, ry, b.w - 10, 2);
+                }
+            });
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.globalAlpha = 1.0;
+
+            const cx = (width * 0.3) + (currentParallaxX * 1.5); 
+            const cy = horizon + 35;
+
+            ctx.fillStyle = 'rgba(0,0,0,0.4)';
+            ctx.beginPath(); 
+            ctx.ellipse(cx + 35, cy + 55, 60, 10, 0, 0, Math.PI*2); 
+            ctx.fill();
+
+            const bobY = Math.sin(frame * 0.03) * 3;
             
-            drawRect(cx, cy, 70, 45, colors.capy);
-            drawRect(cx + 50, cy - 15, 35, 35, colors.capy);
-            drawRect(cx + 75, cy, 15, 10, '#A06E3E');
+            drawRect(cx, cy + bobY, 70, 50, colors.capy);
+            drawRect(cx + 50, cy + bobY - 15, 35, 35, colors.capy);
+            drawRect(cx + 75, cy + bobY - 5, 12, 8, '#5D4037');
             
-            if (Math.sin(frame * 0.05) > -0.8) {
-                drawRect(cx + 75, cy - 5, 4, 4, '#000');
+            if (Math.sin(frame * 0.03) > -0.95) {
+                drawRect(cx + 75, cy + bobY - 10, 5, 5, '#000');
             } else {
-                drawRect(cx + 73, cy - 5, 8, 2, '#000');
+                drawRect(cx + 73, cy + bobY - 10, 9, 2, '#000');
             }
+            drawRect(cx + 55, cy + bobY - 15, 8, 8, '#3E2723');
 
-            const cx2 = width * 0.6 + Math.sin(frame * 0.008 + 2) * 8;
-            drawRect(cx2, cy + 20, 50, 30, '#6F4E37');
-            drawRect(cx2 + 35, cy + 10, 25, 25, '#6F4E37');
-            drawRect(cx2 + 50, cy + 20, 10, 8, '#8B5E3C');
-            if (Math.sin(frame * 0.04) > -0.8) drawRect(cx2 + 50, cy + 15, 3, 3, '#000');
+            const cx2 = (width * 0.7) + (currentParallaxX * 0.8);
+            drawRect(cx2, cy + 25 + bobY, 50, 35, colors.capyDark);
+            drawRect(cx2 + 35, cy + 15 + bobY, 25, 25, colors.capyDark);
+            drawRect(cx2 + 50, cy + 20 + bobY, 4, 4, '#000');
 
-            // Rumput
             ctx.fillStyle = '#020a02';
             ctx.beginPath();
             ctx.moveTo(0, height);
-            ctx.lineTo(0, horizon + 60);
-            for(let i=0; i<=width; i+=20) {
-                ctx.lineTo(i, horizon + 60 + Math.sin(i * 0.05) * 10);
+            ctx.lineTo(0, horizon + 70);
+            for(let i=0; i<=width; i+=30) {
+                const gHeight = 70 + Math.sin(i * 0.1) * 15;
+                ctx.lineTo(i, horizon + gHeight);
             }
             ctx.lineTo(width, height);
             ctx.fill();
@@ -454,7 +592,9 @@
             requestAnimationFrame(animate);
         }
 
+        resize();
         animate();
+
     </script>
 </body>
 </html>
