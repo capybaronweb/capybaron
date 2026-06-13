@@ -59,7 +59,7 @@
 
         h1 {
             font-size: 28px;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
             text-shadow: 4px 4px 0px #000000, 0 0 15px #9945FF;
             line-height: 1.5;
             color: #fff;
@@ -80,10 +80,11 @@
             display: block;
         }
 
+        /* --- LOGO CONTAINER FIX (UKURAN DIKECILKAN) --- */
         .capy-img-container {
-            margin: 30px auto;
-            width: 250px;
-            height: 250px;
+            margin: 20px auto 30px auto; /* Margin Atas: 20px, Bawah: 30px */
+            width: 180px;  /* Dari 250px jadi 180px (Lebih kecil = Terlihat mundur) */
+            height: 180px; 
             background-color: #000;
             display: flex;
             justify-content: center;
@@ -199,11 +200,15 @@
             text-shadow: 1px 1px 0 #000;
         }
 
+        /* Responsive Mobile */
         @media (max-width: 600px) {
             h1 { font-size: 18px; }
             .content-wrapper { margin-top: 20px; padding: 30px 15px; width: 95%; }
             .btn { width: 100%; font-size: 12px; }
-            .capy-img-container { width: 200px; height: 200px; }
+            .capy-img-container { 
+                width: 150px; /* Lebih kecil di HP */
+                height: 150px; 
+            }
         }
     </style>
 </head>
@@ -216,6 +221,7 @@
         <h1>CAPYBARON</h1>
         <span class="highlight">The Richest Capybara On Solana</span>
 
+        <!-- Gambar Logo (Ukuran diperkecil agar terlihat lebih mundur/jauh) -->
         <div class="capy-img-container">
             <img src="capybaron.png" alt="Capybaron Logo">
         </div>
@@ -234,7 +240,7 @@
             </a>
 
             <div class="crypto-box" onclick="copyToClipboard()">
-                <span id="addrText" class="addr-text">7xKXtg2...sAsU</span>
+                <span id="addrText" class="addr-text">sooon</span>
                 <button id="copyBtn" class="copy-btn">COPY</button>
             </div>
         </div>
@@ -243,7 +249,7 @@
     </div>
 
     <script>
-        const fullAddress = "Ssoooonnnnn"; 
+        const fullAddress = "sooon"; 
 
         function copyToClipboard() {
             navigator.clipboard.writeText(fullAddress).then(() => {
@@ -312,7 +318,7 @@
                     w: 30 + Math.random() * 50,
                     h: 50 + Math.random() * 250,
                     color: Math.random() > 0.5 ? colors.neonP : colors.neonG,
-                    offset: Math.random() * 100 // Untuk variasi kedipan antar gedung
+                    offset: Math.random() * 100 
                 });
                 x += 30 + Math.random() * 40;
             }
@@ -353,26 +359,22 @@
             });
             ctx.globalAlpha = 1;
 
-            // 3. CITY (UPDATED: MORE LIGHTS & FLICKERING)
+            // 3. CITY (MANY FLICKERING LIGHTS)
             const horizon = height * 0.65;
             buildings.forEach(b => {
                 const shift = Math.sin(frame * 0.002) * 20;
                 
-                // Bangunan Gelap
                 drawRect(b.x + shift, horizon - b.h, b.w, b.h, '#020205');
                 
-                // --- UPDATE 1: NEON STRIP BERDENYUT (Pulsing) ---
-                // Hitung opacity berdasarkan waktu + offset gedung agar tidak sinkron
+                // Neon Strip Pulse
                 const pulse = 0.6 + Math.sin(frame * 0.08 + b.offset) * 0.4;
                 
-                ctx.shadowBlur = 15 + (pulse * 10); // Glow berubah-ubah
+                ctx.shadowBlur = 15 + (pulse * 10);
                 ctx.shadowColor = b.color;
-                ctx.globalAlpha = pulse; // Kedipan halus
+                ctx.globalAlpha = pulse;
                 
-                // Neon strip utama (horizontal)
                 drawRect(b.x + shift + 4, horizon - b.h + 25, b.w - 8, 5, b.color);
                 
-                // Neon strip tambahan (kadang vertikal)
                 if (b.w > 50) {
                     drawRect(b.x + shift + b.w/2 - 2, horizon - b.h + 10, 4, 60, b.color);
                 }
@@ -380,20 +382,13 @@
                 ctx.shadowBlur = 0;
                 ctx.globalAlpha = 1;
 
-                // --- UPDATE 2: GRID JENDELA KELAP-KELIP ---
-                // Loop untuk membuat pola jendela
+                // Windows Grid Shimmer
                 const winSize = 3;
                 const gap = 8;
                 
-                // Mulai dari bawah neon strip
                 for(let wy = 45; wy < b.h - 10; wy += gap) {
-                    
-                    // Random per baris: apakah baris ini punya lampu?
                     if(Math.random() > 0.4) { 
                         for(let wx = 8; wx < b.w - 8; wx += gap) {
-                            
-                            // Random per jendela: apakah titik ini nyala?
-                            // Math.random() setiap frame membuat efek shimmering (kilau)
                             if(Math.random() > 0.65) { 
                                 ctx.fillStyle = b.color;
                                 ctx.fillRect(b.x + shift + wx, horizon - b.h + wy, winSize, winSize);
@@ -406,14 +401,13 @@
             // 4. DANAU
             drawRect(0, horizon, width, height - horizon, colors.water);
             
-            // Refleksi Cahaya Gedung di Air
+            // Reflections
             ctx.globalAlpha = 0.15;
             for(let y = horizon; y < height; y += 10) {
                 const waveOffset = Math.sin(frame * 0.05 + y * 0.1) * 5;
                 
                 buildings.forEach(b => {
                     const shift = Math.sin(frame * 0.002) * 20;
-                    // Refleksi strip neon utama
                     if (Math.random() > 0.7) {
                         ctx.fillStyle = b.color;
                         ctx.fillRect(b.x + shift + 4, y + waveOffset + 25, b.w - 8, 2);
