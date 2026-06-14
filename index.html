@@ -328,8 +328,6 @@
             color: #e0aaff;
             border: 2px solid #c77dff;
             box-shadow: 0 6px 0 #3c096c;
-            font-weight: bold;
-            letter-spacing: 1px;
         }
         
         .btn-tecnologifs:hover { 
@@ -454,7 +452,7 @@
         }
 
         /* =========================================
-           MODAL & GRID TECNOLOGIFS (UPDATED FORMAT WEBP)
+           MODAL & GRID TECNOLOGIFS
            ========================================= */
         
         .tecnologifs-overlay {
@@ -542,7 +540,23 @@
             border-radius: 4px;
         }
 
-        /* Grid Layout 12 Items */
+        /* Judul Section di dalam Modal */
+        .gallery-section-title {
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #FCD21D; /* KUNING */
+            text-shadow: 2px 2px 0 #000;
+            border-bottom: 2px solid #5a189a;
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+
+        .gallery-section-title:first-child {
+            margin-top: 0;
+        }
+
+        /* Grid Layout */
         .meme-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -567,13 +581,14 @@
         .grid-item {
             background: #000;
             border: 2px solid #5a189a;
-            padding: 5px;
+            padding: 0; 
             position: relative;
             transition: transform 0.2s, border-color 0.2s;
             aspect-ratio: 1 / 1; 
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
 
         .grid-item:hover {
@@ -591,16 +606,38 @@
             display: block;
         }
 
-        .grid-label {
+        /* STYLE TULISAN LABEL NAMA (DI BAWAH GAMBAR) */
+        .item-name {
             position: absolute;
-            top: 5px;
-            left: 5px;
-            background: rgba(0,0,0,0.8);
-            color: #c77dff;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.85); /* Latar gelap agar tulisan terbaca */
+            color: #e0aaff; /* Teks ungu muda */
             font-size: 8px;
-            padding: 2px 4px;
-            pointer-events: none;
-            border: 1px solid #c77dff;
+            padding: 6px 4px;
+            text-align: center;
+            border-top: 1px solid #5a189a;
+            text-transform: uppercase;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            z-index: 2;
+        }
+
+        /* STYLE UNTUK DISCLAIMER BARU DI MODAL */
+        .modal-disclaimer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px dashed #5a189a;
+        }
+
+        .modal-disclaimer p {
+            font-size: 8px;
+            color: #cccccc; 
+            line-height: 1.6;
+            text-shadow: 1px 1px 0 #000;
+            margin-bottom: 0;
         }
 
         /* --- RESPONSIVE --- */
@@ -612,7 +649,8 @@
             .roadmap-container { padding: 15px; }
             .modal-title { font-size: 14px; }
             .modal-content { padding: 10px; max-height: 85vh; }
-            .grid-label { display: none; }
+            .gallery-section-title { font-size: 12px; }
+            .modal-disclaimer p { font-size: 7px; }
         }
     </style>
 </head>
@@ -627,35 +665,78 @@
     <!-- Toast Notification -->
     <div id="toast" class="toast">ADDRESS COPIED TO CLIPBOARD!</div>
 
-    <!-- MODAL TECNOLOGIFS (FORMAT DIUBAH KE WEBP: wb1 - wb12) -->
+    <!-- MODAL TECNOLOGIFS -->
     <div id="tecnologifsModal" class="tecnologifs-overlay">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">TECNOLOGIFS</h2>
+                <h2 class="modal-title">Technologifs</h2>
                 <button class="close-btn" onclick="closeTecnologifs()">X CLOSE</button>
             </div>
             
             <div class="modal-scroll-area">
-                <p style="margin-bottom: 15px; color: #e0aaff; font-size: 10px;">
-                    DATABASE: 12 FILES LOADED (WEBP FORMAT).<br>
-                    STATUS: HIGH QUALITY MEMES.
-                </p>
-
+                <!-- BAGIAN 1: OUR PARTNER -->
+                <h3 class="gallery-section-title">OUR PARTNER</h3>
                 <div class="meme-grid">
-                    <!-- 12 Items menggunakan format wb1.webp - wb12.webp -->
-                    <div class="grid-item"><span class="grid-label">#01</span><img src="wb1.webp" alt="Meme 1"></div>
-                    <div class="grid-item"><span class="grid-label">#02</span><img src="wb2.webp" alt="Meme 2"></div>
-                    <div class="grid-item"><span class="grid-label">#03</span><img src="wb3.webp" alt="Meme 3"></div>
-                    <div class="grid-item"><span class="grid-label">#04</span><img src="wb4.webp" alt="Meme 4"></div>
-                    <div class="grid-item"><span class="grid-label">#05</span><img src="wb5.webp" alt="Meme 5"></div>
-                    <div class="grid-item"><span class="grid-label">#06</span><img src="wb6.webp" alt="Meme 6"></div>
-                    <div class="grid-item"><span class="grid-label">#07</span><img src="wb7.webp" alt="Meme 7"></div>
-                    <div class="grid-item"><span class="grid-label">#08</span><img src="wb8.webp" alt="Meme 8"></div>
-                    <div class="grid-item"><span class="grid-label">#09</span><img src="wb9.webp" alt="Meme 9"></div>
-                    <div class="grid-item"><span class="grid-label">#10</span><img src="wb10.webp" alt="Meme 10"></div>
-                    <div class="grid-item"><span class="grid-label">#11</span><img src="wb11.webp" alt="Meme 11"></div>
-                    <div class="grid-item"><span class="grid-label">#12</span><img src="wb12.webp" alt="Meme 12"></div>
+                    <div class="grid-item">
+                        <img src="wb1.webp" alt="Solana">
+                        <span class="item-name">Solana</span>
+                    </div>
+                    <div class="grid-item">
+                        <img src="wb2.webp" alt="Orca">
+                        <span class="item-name">Orca</span>
+                    </div>
+                    <div class="grid-item">
+                        <img src="wb3.webp" alt="Tesla">
+                        <span class="item-name">Tesla</span>
+                    </div>
+                    <div class="grid-item">
+                        <img src="wb4.webp" alt="SpaceX">
+                        <span class="item-name">SpaceX</span>
+                    </div>
+                    <div class="grid-item">
+                        <img src="wb5.webp" alt="NVIDIA">
+                        <span class="item-name">NVIDIA</span>
+                    </div>
+                    <div class="grid-item">
+                        <img src="wb6.webp" alt="F1">
+                        <span class="item-name">Formula One</span>
+                    </div>
+                    <div class="grid-item">
+                        <img src="wb7.webp" alt="Doge">
+                        <span class="item-name">Doge Coin</span>
+                    </div>
+                    <div class="grid-item">
+                        <img src="wb8.webp" alt="Aramco">
+                        <span class="item-name">Saudi Aramco</span>
+                    </div>
                 </div>
+
+                <!-- BAGIAN 2: INVESTORS -->
+                <h3 class="gallery-section-title">INVESTORS</h3>
+                <div class="meme-grid">
+                    <div class="grid-item">
+                        <img src="wb9.webp" alt="FTX">
+                        <span class="item-name">FTX</span>
+                    </div>
+                    <div class="grid-item">
+                        <img src="wb10.webp" alt="Jennie">
+                        <span class="item-name">Jennie BP</span>
+                    </div>
+                    <div class="grid-item">
+                        <img src="wb11.webp" alt="MCD">
+                        <span class="item-name">MCD</span>
+                    </div>
+                    <div class="grid-item">
+                        <img src="wb12.webp" alt="Pump">
+                        <span class="item-name">Pumpfun</span>
+                    </div>
+                </div>
+
+                <!-- DISCLAIMER BARU -->
+                <div class="modal-disclaimer">
+                    <p>This is a meme coin for satirical purposes. We are 100% independent and have no affiliation, association, or endorsement with any third-party entity, brand, or individual. Trade at your own risk.</p>
+                </div>
+
             </div>
         </div>
     </div>
@@ -675,7 +756,7 @@
             The dogs are barking, the cats are fighting, but the Baron? The Baron is just chilling. Introducing $BARON, the richest and most relaxed Capybara on the blockchain. While other coins panic, we sip tea in the VIP lounge. The swamp era is over. The mansion era has begun.
         </p>
 
-        <!-- MEME GIF SECTION 1 (File: meme.gif) -->
+        <!-- MEME GIF SECTION 1 -->
         <div class="meme-section">
             <div class="tv-frame">
                 <div class="tv-screen">
@@ -730,7 +811,7 @@
             
             <!-- TOMBOL TECNOLOGIFS -->
             <button class="btn btn-tecnologifs" onclick="openTecnologifs()">
-                TECNOLOGIFS
+                Technologifs
             </button>
 
             <a href="https://t.me/+vSxQVvlavq85Yjll" target="_blank" class="btn btn-telegram">
@@ -741,7 +822,7 @@
                 FOLLOW X
             </a>
 
-            <!-- MEME GIF SECTION 2 (File: meme2.gif) -->
+            <!-- MEME GIF SECTION 2 -->
             <div class="meme-section">
                 <div class="tv-frame">
                     <div class="tv-screen">
