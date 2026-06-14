@@ -1,3 +1,10 @@
+Siap, saya sudah ubah nama filenya menjadi `mm1.gif` sampai `mm12.gif` di dalam galeri **TECNOLOGIFS**.
+
+Sekarang file-file **tidak akan bertabrakan** dengan `meme.gif` dan `meme2.gif` yang ada di halaman utama.
+
+Berikut adalah file lengkapnya:
+
+```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -149,7 +156,7 @@
 
         /* --- MEME GIF SECTION (REUSABLE) --- */
         .meme-section {
-            margin: 0 auto; /* Margin diatur oleh gap container parent jika ada */
+            margin: 0 auto; 
             width: 100%;
             max-width: 400px;
             position: relative;
@@ -267,7 +274,7 @@
             margin-bottom: 10px;
             padding: 20px;
             background: rgba(0, 0, 0, 0.9);
-            border: 2px solid #FCD21D; /* Border Kuning Emas */
+            border: 2px solid #FCD21D;
             box-shadow: 0 0 15px rgba(252, 210, 29, 0.2);
             text-align: left;
         }
@@ -286,7 +293,7 @@
         .disclaimer-box p {
             font-size: 9px;
             line-height: 1.8;
-            color: #fff; /* Teks putih agar mudah dibaca */
+            color: #fff;
             text-shadow: 1px 1px 0 #000;
             margin-bottom: 10px;
         }
@@ -298,7 +305,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
+            gap: 15px; 
         }
 
         .btn {
@@ -315,10 +322,28 @@
             border: 2px solid transparent;
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
 
         .btn:active {
             transform: translateY(4px);
+        }
+
+        /* --- TOMBOL TECNOLOGIFS --- */
+        .btn-tecnologifs {
+            background-color: #5a189a;
+            color: #e0aaff;
+            border: 2px solid #c77dff;
+            box-shadow: 0 6px 0 #3c096c;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .btn-tecnologifs:hover { 
+            background-color: #7b2cbf;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 0 #3c096c;
         }
 
         .btn-telegram {
@@ -435,6 +460,156 @@
             opacity: 0.8;
         }
 
+        /* =========================================
+           MODAL & GRID TECNOLOGIFS (UPDATED FILENAMES)
+           ========================================= */
+        
+        .tecnologifs-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.90);
+            z-index: 999;
+            padding: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tecnologifs-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #0a0a14;
+            border: 4px solid #c77dff;
+            box-shadow: 0 0 30px rgba(199, 125, 255, 0.4);
+            width: 95%;
+            max-width: 800px;
+            max-height: 90vh;
+            padding: 15px;
+            position: relative;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            margin-bottom: 15px;
+            border-bottom: 2px dashed #3c096c;
+            padding-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .modal-title {
+            color: #e0aaff;
+            font-size: 20px;
+            text-shadow: 4px 4px 0 #3c096c;
+        }
+
+        .close-btn {
+            background: #ff0055;
+            border: 2px solid #fff;
+            color: white;
+            padding: 8px 12px;
+            font-family: 'Press Start 2P';
+            font-size: 10px;
+            cursor: pointer;
+            box-shadow: 2px 2px 0 #000;
+            transition: transform 0.1s;
+        }
+        
+        .close-btn:hover {
+            transform: scale(1.05);
+            background: #ff2266;
+        }
+
+        .modal-scroll-area {
+            overflow-y: auto;
+            padding-right: 5px;
+            scrollbar-width: thin;
+            scrollbar-color: #5a189a #0a0a14;
+        }
+
+        .modal-scroll-area::-webkit-scrollbar {
+            width: 8px;
+        }
+        .modal-scroll-area::-webkit-scrollbar-track {
+            background: #0a0a14;
+        }
+        .modal-scroll-area::-webkit-scrollbar-thumb {
+            background-color: #5a189a;
+            border-radius: 4px;
+        }
+
+        /* Grid Layout 12 Items */
+        .meme-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        @media (min-width: 600px) {
+            .meme-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 15px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .meme-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 20px;
+            }
+        }
+
+        .grid-item {
+            background: #000;
+            border: 2px solid #5a189a;
+            padding: 5px;
+            position: relative;
+            transition: transform 0.2s, border-color 0.2s;
+            aspect-ratio: 1 / 1; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .grid-item:hover {
+            border-color: #e0aaff;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(199, 125, 255, 0.3);
+            z-index: 1;
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            image-rendering: pixelated;
+            display: block;
+        }
+
+        .grid-label {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background: rgba(0,0,0,0.8);
+            color: #c77dff;
+            font-size: 8px;
+            padding: 2px 4px;
+            pointer-events: none;
+            border: 1px solid #c77dff;
+        }
+
         /* --- RESPONSIVE --- */
         @media (max-width: 600px) {
             h1 { font-size: 20px; }
@@ -442,12 +617,9 @@
             .btn { width: 100%; font-size: 12px; padding: 15px 20px; }
             .capy-img-container { width: 160px; height: 160px; }
             .roadmap-container { padding: 15px; }
-            .roadmap-container h2 { font-size: 12px; }
-            .roadmap-container h3 { font-size: 10px; }
-            .disclaimer-box { padding: 15px; }
-            .disclaimer-box h3 { font-size: 10px; }
-            .disclaimer-box p { font-size: 8px; }
-            .meme-section { max-width: 100%; }
+            .modal-title { font-size: 14px; }
+            .modal-content { padding: 10px; max-height: 85vh; }
+            .grid-label { display: none; }
         }
     </style>
 </head>
@@ -461,6 +633,39 @@
 
     <!-- Toast Notification -->
     <div id="toast" class="toast">ADDRESS COPIED TO CLIPBOARD!</div>
+
+    <!-- MODAL TECNOLOGIFS (FILENAMES UPDATED TO mm1-mm12) -->
+    <div id="tecnologifsModal" class="tecnologifs-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">TECNOLOGIFS</h2>
+                <button class="close-btn" onclick="closeTecnologifs()">X CLOSE</button>
+            </div>
+            
+            <div class="modal-scroll-area">
+                <p style="margin-bottom: 15px; color: #e0aaff; font-size: 10px;">
+                    DATABASE: 12 FILES LOADED.<br>
+                    STATUS: MEME MAXIMUM.
+                </p>
+
+                <div class="meme-grid">
+                    <!-- 12 Items menggunakan format mm1 - mm12 -->
+                    <div class="grid-item"><span class="grid-label">#01</span><img src="mm1.gif" alt="Meme 1"></div>
+                    <div class="grid-item"><span class="grid-label">#02</span><img src="mm2.gif" alt="Meme 2"></div>
+                    <div class="grid-item"><span class="grid-label">#03</span><img src="mm3.gif" alt="Meme 3"></div>
+                    <div class="grid-item"><span class="grid-label">#04</span><img src="mm4.gif" alt="Meme 4"></div>
+                    <div class="grid-item"><span class="grid-label">#05</span><img src="mm5.gif" alt="Meme 5"></div>
+                    <div class="grid-item"><span class="grid-label">#06</span><img src="mm6.gif" alt="Meme 6"></div>
+                    <div class="grid-item"><span class="grid-label">#07</span><img src="mm7.gif" alt="Meme 7"></div>
+                    <div class="grid-item"><span class="grid-label">#08</span><img src="mm8.gif" alt="Meme 8"></div>
+                    <div class="grid-item"><span class="grid-label">#09</span><img src="mm9.gif" alt="Meme 9"></div>
+                    <div class="grid-item"><span class="grid-label">#10</span><img src="mm10.gif" alt="Meme 10"></div>
+                    <div class="grid-item"><span class="grid-label">#11</span><img src="mm11.gif" alt="Meme 11"></div>
+                    <div class="grid-item"><span class="grid-label">#12</span><img src="mm12.gif" alt="Meme 12"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Konten Utama -->
     <main class="content-wrapper">
@@ -477,7 +682,7 @@
             The dogs are barking, the cats are fighting, but the Baron? The Baron is just chilling. Introducing $BARON, the richest and most relaxed Capybara on the blockchain. While other coins panic, we sip tea in the VIP lounge. The swamp era is over. The mansion era has begun.
         </p>
 
-        <!-- MEME GIF SECTION 1 (Pertama) -->
+        <!-- MEME GIF SECTION 1 (File: meme.gif - TIDAK DIUBAH) -->
         <div class="meme-section">
             <div class="tv-frame">
                 <div class="tv-screen">
@@ -529,6 +734,12 @@
 
         <!-- Tombol Sosial Media & Aksi -->
         <div class="btn-group">
+            
+            <!-- TOMBOL TECNOLOGIFS -->
+            <button class="btn btn-tecnologifs" onclick="openTecnologifs()">
+                TECNOLOGIFS
+            </button>
+
             <a href="https://t.me/+vSxQVvlavq85Yjll" target="_blank" class="btn btn-telegram">
                 JOIN TELEGRAM
             </a>
@@ -537,11 +748,10 @@
                 FOLLOW X
             </a>
 
-            <!-- MEME GIF SECTION 2 (Kedua - Di bawah logo twitter) -->
+            <!-- MEME GIF SECTION 2 (File: meme2.gif - TIDAK DIUBAH) -->
             <div class="meme-section">
                 <div class="tv-frame">
                     <div class="tv-screen">
-                        <!-- GANTI 'meme2.gif' DENGAN FILE GIF ANDA YANG KEDUA -->
                         <img src="meme2.gif" alt="Capybara Shill">
                     </div>
                 </div>
@@ -554,7 +764,7 @@
             </div>
         </div>
 
-        <!-- DISCLAIMER SECTION (TEXT DIHAPUS) -->
+        <!-- DISCLAIMER SECTION -->
         <div class="disclaimer-box">
             <h3>⚠️ The Legal Stuff (Read This)</h3>
             <p>
@@ -601,6 +811,22 @@
             setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
         }
 
+        // --- TECNOLOGIFS MODAL LOGIC ---
+        function openTecnologifs() {
+            document.getElementById('tecnologifsModal').classList.add('active');
+        }
+
+        function closeTecnologifs() {
+            document.getElementById('tecnologifsModal').classList.remove('active');
+        }
+
+        // Close modal when clicking outside content
+        document.getElementById('tecnologifsModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeTecnologifs();
+            }
+        });
+
         // --- ANIMATION ENGINE ---
         const canvas = document.getElementById('pixelCanvas');
         const ctx = canvas.getContext('2d', { alpha: false });
@@ -619,14 +845,13 @@
             neonG: '#14F195',
             water: '#080814',
             moon: '#FFFFDD',
-            coin: '#FFD700', // Emas
-            coinDark: '#DAA520', // Emas Gelap (bayangan)
+            coin: '#FFD700',
+            coinDark: '#DAA520',
             capy: '#8B5E3C',
             capyDark: '#6F4E37',
             capyDarker: '#4E342E'
         };
 
-        // --- STAR & MOON DATA ---
         const stars = [];
         
         function initStars() {
@@ -642,18 +867,16 @@
             }
         }
 
-        // --- COIN RAIN DATA (NEW) ---
         const coins = [];
         
         function spawnCoin() {
-            // Random chance to spawn a coin
-            if(Math.random() > 0.90) { // 10% chance per frame check (adjusted in loop)
+            if(Math.random() > 0.90) {
                 coins.push({
                     x: Math.random() * width,
-                    y: -50, // Start di atas layar
-                    size: 10 + Math.random() * 20, // Ukuran bervariasi
-                    speed: 2 + Math.random() * 4, // Kecepatan jatuh bervariasi
-                    swaySpeed: 0.02 + Math.random() * 0.05, // Kecepatan goyang kiri-kanan
+                    y: -50,
+                    size: 10 + Math.random() * 20,
+                    speed: 2 + Math.random() * 4,
+                    swaySpeed: 0.02 + Math.random() * 0.05,
                     swayOffset: Math.random() * Math.PI * 2,
                     rotation: 0,
                     rotationSpeed: (Math.random() - 0.5) * 0.1
@@ -713,7 +936,6 @@
             ctx.fillRect(Math.floor(x), Math.floor(y), Math.floor(w), Math.floor(h));
         }
 
-        // --- DATA CAPYBARA ---
         const capybaras = [
             { x: 0.25, y: 0.68, scale: 1.2, color: colors.capy, pX: 1.5 }, 
             { x: 0.45, y: 0.70, scale: 0.8, color: colors.capyDark, pX: 1.0 }, 
@@ -727,29 +949,21 @@
         function drawCapybara(cx, cy, scale, color, blinkOffset) {
             const bobY = Math.sin(frame * 0.03 + blinkOffset) * 3;
 
-            // Bayangan
             ctx.fillStyle = 'rgba(0,0,0,0.4)';
             ctx.beginPath(); 
             ctx.ellipse(cx + (35 * scale), cy + (55 * scale), (60 * scale), (10 * scale), 0, 0, Math.PI*2); 
             ctx.fill();
 
-            // Badan
             drawRect(cx, cy + bobY, 70 * scale, 50 * scale, color);
-            
-            // Kepala
             drawRect(cx + (50 * scale), cy + bobY - (15 * scale), 35 * scale, 35 * scale, color);
-            
-            // Hidung
             drawRect(cx + (75 * scale), cy + bobY - (5 * scale), 12 * scale, 8 * scale, '#3E2723');
             
-            // Mata (Blink logic)
             if (Math.sin(frame * 0.03 + blinkOffset) > -0.95) {
                 drawRect(cx + (75 * scale), cy + bobY - (10 * scale), 5 * scale, 5 * scale, '#000');
             } else {
                 drawRect(cx + (73 * scale), cy + bobY - (10 * scale), 9 * scale, 2 * scale, '#000');
             }
             
-            // Telinga
             drawRect(cx + (55 * scale), cy + bobY - (15 * scale), 8 * scale, 8 * scale, '#3E2723');
         }
 
@@ -759,14 +973,12 @@
 
             ctx.clearRect(0, 0, width, height);
 
-            // 1. SKY GRADIENT
             const grad = ctx.createLinearGradient(0, 0, 0, height * 0.7);
             grad.addColorStop(0, colors.skyTop);
             grad.addColorStop(1, colors.skyBot);
             ctx.fillStyle = grad;
             ctx.fillRect(0, 0, width, height);
 
-            // 2. STARS
             stars.forEach(s => {
                 const alpha = 0.3 + Math.sin(frame * s.blinkSpeed + s.offset) * 0.5;
                 ctx.globalAlpha = alpha;
@@ -777,7 +989,6 @@
             });
             ctx.globalAlpha = 1.0;
 
-            // 3. MOON
             const mx = (width * 0.8) - (currentParallaxX * 0.5);
             const my = height * 0.15;
             ctx.shadowBlur = 60;
@@ -787,13 +998,11 @@
             ctx.arc(mx, my, 40, 0, Math.PI*2);
             ctx.fill();
             ctx.shadowBlur = 0;
-            // Detail kawah
             ctx.fillStyle = 'rgba(200, 200, 200, 0.5)';
             ctx.fillRect(mx - 10, my - 5, 8, 8);
             ctx.fillRect(mx + 5, my + 10, 12, 6);
             ctx.fillRect(mx - 15, my + 15, 5, 5);
 
-            // 4. CITY & LIGHTS
             const horizon = height * 0.65;
             
             buildings.forEach(b => {
@@ -825,10 +1034,8 @@
                 ctx.globalAlpha = 1.0;
             });
 
-            // 5. WATER
             drawRect(0, horizon, width, height - horizon, colors.water);
             
-            // Reflection
             ctx.globalCompositeOperation = 'overlay';
             ctx.globalAlpha = 0.2;
             buildings.forEach(b => {
@@ -843,7 +1050,6 @@
             ctx.globalCompositeOperation = 'source-over';
             ctx.globalAlpha = 1.0;
 
-            // 6. MULTI CAPYBARAS
             capybaras.forEach(c => {
                 const cx = (width * c.x) + (currentParallaxX * c.pX);
                 const cy = height * c.y;
@@ -851,54 +1057,39 @@
                 drawCapybara(cx, cy, c.scale, c.color, blinkOffset);
             });
 
-            // --- 7. COIN RAIN ANIMATION (INSERTED HERE) ---
-            // Spawn coin secara acak setiap beberapa frame
             if (frame % 5 === 0) spawnCoin(); 
 
-            // Update dan gambar koin
             for (let i = coins.length - 1; i >= 0; i--) {
                 let c = coins[i];
-                
-                // Gerakan jatuh
                 c.y += c.speed;
-                // Gerakan goyang (sway)
                 c.x += Math.sin(frame * c.swaySpeed + c.swayOffset) * 1;
-                // Rotasi simulasi (mengubah lebar persegi)
                 c.rotation += c.rotationSpeed;
                 
-                // Hapus jika keluar layar bawah
                 if (c.y > height + 50) {
                     coins.splice(i, 1);
                     continue;
                 }
 
-                // Gambar Koin (Pixel Style)
-                // Kita gambar kotak utama dan detail tengahnya agar terlihat seperti koin 3D
-                
-                // Efek parallax sederhana berdasarkan ukuran
                 const layerOffset = c.size * 0.2; 
                 
-                ctx.fillStyle = colors.coinDark; // Bayangan samping
+                ctx.fillStyle = colors.coinDark;
                 ctx.fillRect(c.x + 2, c.y + 2, c.size, c.size);
 
-                ctx.fillStyle = colors.coin; // Warna Emas Utama
+                ctx.fillStyle = colors.coin;
                 
-                // Simulasi rotasi dengan mengubah skala X
                 const scaleX = Math.abs(Math.cos(c.rotation));
                 const drawW = c.size * scaleX;
                 const offsetX = (c.size - drawW) / 2;
 
                 drawRect(c.x + offsetX, c.y, drawW, c.size, colors.coin);
 
-                // Tanda $ di tengah koin (hanya jika cukup lebar)
                 if (drawW > 8) {
-                    ctx.fillStyle = '#B8860B'; // Emas lebih gelap untuk tulisan
+                    ctx.fillStyle = '#B8860B';
                     drawRect(c.x + offsetX + (drawW/4), c.y + (c.size/4), drawW/2, c.size/5, '#B8860B');
                     drawRect(c.x + offsetX + (drawW/2) - 1, c.y + (c.size/2.5), c.size/5, c.size/2, '#B8860B');
                 }
             }
 
-            // 8. GRASS FOREGROUND
             ctx.fillStyle = '#020a02';
             ctx.beginPath();
             ctx.moveTo(0, height);
