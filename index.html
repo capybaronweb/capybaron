@@ -80,7 +80,7 @@
             margin-bottom: 10px;
             text-shadow: 4px 4px 0px #000000, 0 0 20px #9945FF;
             line-height: 1.5;
-            color: #fff;
+            color: #FCD21D; 
             cursor: default;
             display: inline-block;
         }
@@ -108,7 +108,7 @@
             color: #14F195;
         }
 
-        /* --- GAMBAR CAPYBARON --- */
+        /* --- GAMBAR CAPYBARON (LOGO) --- */
         .capy-img-container {
             margin: 30px auto;
             width: 200px;
@@ -145,6 +145,150 @@
             0% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
             100% { transform: translateY(0px); }
+        }
+
+        /* --- MEME GIF SECTION (REUSABLE) --- */
+        .meme-section {
+            margin: 0 auto; /* Margin diatur oleh gap container parent jika ada */
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .tv-frame {
+            background: #000;
+            padding: 10px;
+            border: 4px solid #555;
+            border-radius: 20px;
+            box-shadow: 
+                0 0 0 4px #000, 
+                0 0 0 8px #444,
+                0 0 20px rgba(153, 69, 255, 0.4);
+            position: relative;
+        }
+
+        .tv-screen {
+            background: #111;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .tv-frame img {
+            width: 100%;
+            display: block;
+            image-rendering: pixelated;
+        }
+        
+        /* Efek kilau layar TV */
+        .tv-screen::after {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        /* --- ROADMAP CONTAINER --- */
+        .roadmap-container {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.85);
+            border: 2px solid #9945FF;
+            box-shadow: 0 0 15px rgba(153, 69, 255, 0.3);
+            text-align: left;
+        }
+
+        .roadmap-container h2 {
+            font-size: 16px;
+            color: #14F195;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 0 #000;
+            text-align: center;
+        }
+
+        .roadmap-container h3 {
+            font-size: 11px;
+            color: #9945FF;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            border-bottom: 1px dashed #555;
+            padding-bottom: 5px;
+            text-shadow: 1px 1px 0 #000;
+        }
+
+        .roadmap-container p.intro-text {
+            font-size: 10px;
+            color: #FCD21D; 
+            margin-bottom: 15px;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .roadmap-container ul {
+            list-style-type: square;
+            padding-left: 20px;
+        }
+
+        .roadmap-container li {
+            font-size: 10px;
+            line-height: 1.8;
+            color: #FCD21D; 
+            text-shadow: 1px 1px 0 #000;
+            margin-bottom: 4px;
+        }
+
+        .roadmap-container li::marker {
+            color: #14F195;
+        }
+
+        .roadmap-status {
+            font-size: 9px;
+            color: #14F195; 
+            display: block;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 0 #000;
+        }
+
+        /* --- DISCLAIMER BOX --- */
+        .disclaimer-box {
+            margin-top: 30px;
+            margin-bottom: 10px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #FCD21D; /* Border Kuning Emas */
+            box-shadow: 0 0 15px rgba(252, 210, 29, 0.2);
+            text-align: left;
+        }
+
+        .disclaimer-box h3 {
+            font-size: 11px;
+            color: #FCD21D;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 0 #000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .disclaimer-box p {
+            font-size: 9px;
+            line-height: 1.8;
+            color: #fff; /* Teks putih agar mudah dibaca */
+            text-shadow: 1px 1px 0 #000;
+            margin-bottom: 10px;
         }
 
         /* --- TOMBOL --- */
@@ -297,6 +441,13 @@
             .content-wrapper { margin-top: 20px; padding: 30px 15px; width: 90%; }
             .btn { width: 100%; font-size: 12px; padding: 15px 20px; }
             .capy-img-container { width: 160px; height: 160px; }
+            .roadmap-container { padding: 15px; }
+            .roadmap-container h2 { font-size: 12px; }
+            .roadmap-container h3 { font-size: 10px; }
+            .disclaimer-box { padding: 15px; }
+            .disclaimer-box h3 { font-size: 10px; }
+            .disclaimer-box p { font-size: 8px; }
+            .meme-section { max-width: 100%; }
         }
     </style>
 </head>
@@ -314,9 +465,9 @@
     <!-- Konten Utama -->
     <main class="content-wrapper">
         <h1>CAPYBARON</h1>
-        <span class="highlight">The Richest Capybara On Solana</span>
+        <span class="highlight">The Chilling Capybara On Solana</span>
 
-        <!-- Gambar Capybaron (nice.jpg) -->
+        <!-- Gambar Capybaron (Logo Utama) -->
         <div class="capy-img-container">
             <img src="nice.jpg" alt="Capybaron Logo">
         </div>
@@ -326,21 +477,92 @@
             The dogs are barking, the cats are fighting, but the Baron? The Baron is just chilling. Introducing $BARON, the richest and most relaxed Capybara on the blockchain. While other coins panic, we sip tea in the VIP lounge. The swamp era is over. The mansion era has begun.
         </p>
 
-        <!-- Tombol Sosial Media -->
+        <!-- MEME GIF SECTION 1 (Pertama) -->
+        <div class="meme-section">
+            <div class="tv-frame">
+                <div class="tv-screen">
+                    <img src="meme.gif" alt="Capybara Meme">
+                </div>
+            </div>
+        </div>
+
+        <!-- ROADMAP SECTION -->
+        <div class="roadmap-container">
+            <h2>The Roadmap (The Journey to Zen)</h2>
+            <p class="intro-text">Most roadmaps are stressful. They promise "Revolutionary Tech" and "Quantum Encryption." We promise naps and hot springs.</p>
+
+            <h3>Phase 1: The Awakening</h3>
+            <span class="roadmap-status">Status: We are awake. Sort of.</span>
+            <ul>
+                <li>Capybaron opens one eye.</li>
+                <li>Website Launch (Pixel art included).</li>
+                <li>Telegram & X (Twitter) Accounts created.</li>
+                <li>Meme Generation: 50GB of Capybara photos secured.</li>
+                <li>Launch on Pump.fun: The bonding curve begins.</li>
+            </ul>
+
+            <h3>Phase 2: The Great Swim</h3>
+            <span class="roadmap-status">Status: Getting our feet wet.</span>
+            <ul>
+                <li>Bonding Curve Filled: You guys bought enough tokens. Good job.</li>
+                <li>Migration to Raydium: We move from the small pond to the big lake.</li>
+                <li>Liquidity Burn: We set the LP pool on fire (metaphorically).</li>
+                <li>CoinGecko & CMC Listing: So the "normies" can find us.</li>
+                <li>1,000 Holders: A small but chill village.</li>
+            </ul>
+
+            <h3>Phase 3: The Diplomacy</h3>
+            <span class="roadmap-status">Status: Making friends.</span>
+            <ul>
+                <li>Strategic Partnerships: We talk to the Dog & cat coins. We tell them to stop barking. They probably won't listen, but it's worth a try.</li>
+                <li>CEX Listings: We get listed on exchanges that don't ask for our kidney.</li>
+            </ul>
+
+            <h3>Phase 4: The Mansion Era</h3>
+            <span class="roadmap-status">Status: We made it.</span>
+            <ul>
+                <li>10,000 Holders: The swamp is crowded.</li>
+                <li>Tier 1 CEX Listings: (Okay, maybe we'll buy a Lambo. But a quiet electric one).</li>
+                <li>$BARON hits $1 Billion Market Cap: The Baron retires to a private island. Social Media is managed by AI monkeys.</li>
+            </ul>
+        </div>
+
+        <!-- Tombol Sosial Media & Aksi -->
         <div class="btn-group">
             <a href="https://t.me/+vSxQVvlavq85Yjll" target="_blank" class="btn btn-telegram">
                 JOIN TELEGRAM
             </a>
 
             <a href="https://x.com/capybaronsol" target="_blank" class="btn btn-twitter">
-                FOLLOW TWITTER (X)
+                FOLLOW X
             </a>
+
+            <!-- MEME GIF SECTION 2 (Kedua - Di bawah logo twitter) -->
+            <div class="meme-section">
+                <div class="tv-frame">
+                    <div class="tv-screen">
+                        <!-- GANTI 'meme2.gif' DENGAN FILE GIF ANDA YANG KEDUA -->
+                        <img src="meme2.gif" alt="Capybara Shill">
+                    </div>
+                </div>
+            </div>
 
             <!-- CRYPTO ADDRESS BOX -->
             <div class="crypto-box" onclick="copyToClipboard()" role="button" aria-label="Copy Contract Address">
                 <span id="addrText" class="addr-text">SOOONNN</span>
                 <button class="copy-btn">COPY</button>
             </div>
+        </div>
+
+        <!-- DISCLAIMER SECTION (TEXT DIHAPUS) -->
+        <div class="disclaimer-box">
+            <h3>⚠️ The Legal Stuff (Read This)</h3>
+            <p>
+                Do not invest rent money. Do not invest tuition money. Do not invest money you were saving for a burger. Invest only money you are willing to lose while laughing at pixelated rodents on the internet.
+                <br><br>
+                Enjoy the chill.<br>
+                $BARON
+            </p>
         </div>
 
         <p class="footer-text">© 2026 Capybaron. Powered by Solana network.</p>
