@@ -322,12 +322,18 @@
             transform: translateY(4px);
         }
 
+        /* --- STYLE FONT PIXEL (GABUNGAN) --- */
+        .btn-pixel {
+            font-family: 'Press Start 2P', monospace; /* Semua tombol pakai ini */
+        }
+
         /* --- TOMBOL TECNOLOGIFS --- */
         .btn-tecnologifs {
             background-color: #5a189a;
             color: #e0aaff;
             border: 2px solid #c77dff;
             box-shadow: 0 6px 0 #3c096c;
+            /* Font dan ukuran sama dengan yang lain karena ada class .btn-pixel */
         }
         
         .btn-tecnologifs:hover { 
@@ -809,16 +815,16 @@
         <!-- Tombol Sosial Media & Aksi -->
         <div class="btn-group">
             
-            <!-- TOMBOL TECNOLOGIFS -->
-            <button class="btn btn-tecnologifs" onclick="openTecnologifs()">
+            <!-- TOMBOL TECNOLOGIFS (PAKAI FONT PIXEL) -->
+            <button class="btn btn-pixel btn-tecnologifs" onclick="openTecnologifs()">
                 Technologifs
             </button>
 
-            <a href="https://t.me/+vSxQVvlavq85Yjll" target="_blank" class="btn btn-telegram">
+            <a href="https://t.me/+vSxQVvlavq85Yjll" target="_blank" class="btn btn-pixel btn-telegram">
                 JOIN TELEGRAM
             </a>
 
-            <a href="https://x.com/capybaronsol" target="_blank" class="btn btn-twitter">
+            <a href="https://x.com/capybaronsol" target="_blank" class="btn btn-pixel btn-twitter">
                 FOLLOW X
             </a>
 
